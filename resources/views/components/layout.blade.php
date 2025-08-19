@@ -21,6 +21,11 @@
                     My Applications
                 </a>
             </li>
+            <li>
+                <a href="{{ route('my_job.index') }}">
+                    My Jobs
+                </a>
+            </li>
             @endauth
         </ul>
         <ul class="flex space-x-2">

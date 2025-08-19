@@ -20,14 +20,14 @@
             @csrf
 
             <div class="mb-4">
-                <x-label for="expected_salary">
+                <x-label :required="true" for="expected_salary">
                     Expected Salary
                 </x-label>
                 <x-text-input type="number" name="expected_salary" />
             </div>
 
             <div class="mb-4">
-                <x-label for="cv">
+                <x-label :required="true" for="cv">
                     Upload CV
                 </x-label>
                 <x-text-input type="file" name="cv" />

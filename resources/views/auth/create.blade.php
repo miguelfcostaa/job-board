@@ -8,12 +8,16 @@
             @csrf
             
             <div class="mb-8">
-                <label for="email" class="mb-2 block font-medium text-slate-900">E-mail</label>
+                <x-label :required="true" for="email">
+                    E-mail
+                </x-label>
                 <x-text-input type="email" name="email" />
             </div>
 
             <div class="mb-8">
-                <label for="password" class="mb-2 block font-medium text-slate-900">Password</label>
+                <x-label for="password" :required="true">
+                    Password
+                </x-label>
                 <x-text-input type="password" name="password" />
             </div>
 
@@ -31,7 +35,14 @@
                 </div>
             </div>
 
-            <x-button class="w-full bg-cyan-200">Login</x-button>
+            <x-button class="w-full bg-cyan-200">Login</x-button>    
         </form>
+        <div class="mt-4 text-center font-medium">
+            <div>
+                <a href="{{ route('create_auth.create') }}" class="text-indigo-600 hover:underline">
+                    Don't have an account?
+                </a>
+            </div>
+        </div>
     </x-card>
 </x-layout>
