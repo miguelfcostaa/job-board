@@ -48,8 +48,9 @@ cp .env.example .env
 php artisan key:generate
 
 # 4. Set up database
-php artisan migrate:refresh --seed # **--seed** flag is optional: adds some sample data
-# Note: for any sample users the password is 'password'
+php artisan migrate
+php artisan migrate:refresh --seed # Optional: adds some sample data
+# Note: for any sample users the password is exactly 'password'
 
 # 5. Build the frontend
 npm run dev
@@ -80,10 +81,6 @@ npm run build
 
 # Run tests
 php artisan test
-
-## 🤔 Questions?
-
-Hit me up if you need help or want to contribute! This is a learning project so don't worry about breaking things - that's how we learn! 
 
 ## 📝 What's inside
 
