@@ -38,7 +38,7 @@ A modern job board application built with Laravel 10, featuring job listings, em
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd laravel-job-board
+   cd job-board
    ```
 
 2. **Install PHP dependencies**
@@ -98,17 +98,6 @@ The application uses the following main entities:
 - Users can submit multiple Job Applications
 - Each Job Application belongs to one User and one Job
 
-## 🎨 Frontend Development
-
-### CSS Compilation
-```bash
-# Watch for changes during development
-npm run tailwind-dev
-
-# Build for production
-npm run tailwind-build
-```
-
 ### Available Scripts
 - `npm run dev` - Start Vite development server
 - `npm run build` - Build assets for production
@@ -166,40 +155,3 @@ Job applications support CV uploads. Ensure the `storage/app/public` directory i
 ```bash
 php artisan storage:link
 ```
-
-## 🚀 Deployment
-
-### Production Checklist
-
-1. Set `APP_ENV=production` in your `.env` file
-2. Set `APP_DEBUG=false` in your `.env` file
-3. Run `composer install --optimize-autoloader --no-dev`
-4. Run `npm run build` to compile production assets
-5. Run `php artisan config:cache`
-6. Run `php artisan route:cache`
-7. Run `php artisan view:cache`
-8. Ensure proper file permissions on storage directories
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Code Style
-
-This project uses Laravel Pint for code formatting:
-
-```bash
-./vendor/bin/pint
-```
-
-## 📄 License
-
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## 🆘 Support
-
-If you encounter any issues or have questions, please feel free to open an issue on the GitHub repository.
