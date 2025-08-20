@@ -48,8 +48,7 @@ cp .env.example .env
 php artisan key:generate
 
 # 4. Set up database
-php artisan migrate
-php artisan db:seed  # Optional: adds some sample datas
+php artisan migrate:refresh --seed # **--seed** flag is optional: adds some sample data
 # Note: for any sample users the password is 'password'
 
 # 5. Build the frontend
