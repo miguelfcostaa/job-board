@@ -7,7 +7,7 @@
             <div class="mb-4 grid grid-cols-2 gap-4">
                 <div>
                     <div class="mb-1 font-semibold">Search</div>
-                    <x-text-input name="search" value="{{ request('search') }}" placeholder="Search for any text" form-ref="filters" />
+                    <x-text-input name="search" value="{{ request('search') }}" placeholder="Search for a job..." form-ref="filters" />
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Salary</div>
