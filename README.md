@@ -24,7 +24,7 @@ A modern job board application built with Laravel 10, featuring job listings, em
 - **Build Tools**: Vite for asset compilation
 - **Development Tools**: Laravel Debugbar, Laravel Pint (code styling)
 
-## � Quick Start
+## 🚀 Quick Start
 
 Want to run this locally? Here's how:
 
