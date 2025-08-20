@@ -11,9 +11,17 @@
             Apply
         </x-link-button>
         @else
-        <div class="text-center text-sm font-medium text-slate-500">
-            You have already applied for this job.
-        </div>
+            @auth
+                @if ($job->employer->user_id === auth()->id())
+                    <div class="text-center text-sm font-medium text-slate-500">
+                        You cannot apply to your own job.
+                    </div>
+                @endif
+            @else
+                <div class="text-center text-sm font-medium text-slate-500">
+                    You need to log in to apply for this job.
+                </div>
+            @endauth
         @endcan
     </x-job-card>
 
@@ -22,7 +30,7 @@
             More {{ $job->employer->company_name }} Jobs
         </h2>
         <div class="text-sm text-slate-500">
-            @foreach ($job->employer->jobs as $otherJob)
+            @forelse ($otherJobs as $otherJob)
                 <div class="mb-4 flex justify-between">
                     <div>
                         <div class="text-slate-700">
@@ -34,9 +42,14 @@
                     </div>
                     <div class="text-md">{{ number_format($otherJob->salary) }}€</div>
                 </div>
-            @endforeach
-        </div>
-    </x-card>
+            @empty
+                <div class="text-center text-slate-500 font-medium">
+                    This company has no other job listings at the moment.
+                </div>
+                
+            @endforelse
+            </div>
+        </x-card>
 
     <x-card class="mb-32">
         <h2 class="mb-4 text-lg font-medium">
@@ -44,8 +57,8 @@
         </h2>
         @if ($job->jobApplications->isNotEmpty())
             @foreach ($job->jobApplications as $application)
-                <div>
-                    {{ $application->user->name }} applied for this job {{ $application->created_at->diffForHumans() }}.
+                <div class="text-slate-500 py-1">
+                    <span class="font-medium">{{ $application->user->name }}</span> applied for this job {{ $application->created_at->diffForHumans() }}.
                 </div>
             @endforeach
         @else

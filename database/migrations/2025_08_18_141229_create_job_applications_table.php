@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Job::class);
+            $table->foreignIdFor(Job::class)
+                ->onDelete('cascade');
             $table->unsignedInteger('expected_salary');
 
             $table->timestamps();

@@ -12,21 +12,42 @@
                     <x-link-button href="{{ route('my_job.edit', $job) }}">
                         Edit
                     </x-link-button>
+                    @if($job->trashed())
+                    <form method="POST" action="{{ route('my_job.restore', $job) }}">
+                        @csrf
+                        @method('PUT')
+                        <x-button>Restore</x-button>
+                    </form>
+                    @else
+                    <form method="POST" action="{{ route('my_job.destroy', $job) }}">
+                        @csrf
+                        @method('DELETE')
+                        <x-button>Delete</x-button>
+                    </form>
+                    @endif
                 </div>
+                @if ($job->jobApplications->isNotEmpty())
+                <div>
+                    <h2 class="mb-4 text-lg font-medium">
+                        Applications
+                    </h2>
+                </div>
+                @endif
                 @forelse ($job->jobApplications as $application)
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between mb-4">
                         <div>
-                            <div>
+                            <div class="text-base">
                                 {{ $application->user->name }}
                             </div>
-                            <div>
+                            <div class="mb-1">
                                 Applied {{ $application->created_at->diffForHumans() }}
                             </div>
-                            <div>
+                            <div class="text-indigo-500 hover:underline cursor-pointer">
                                 Download CV
                             </div>
                         </div>
                         <div>
+                            Expected Salary:
                             {{ number_format($application->expected_salary) }}€
                         </div>
                     </div>

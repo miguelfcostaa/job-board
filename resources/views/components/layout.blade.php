@@ -31,7 +31,9 @@
         <ul class="flex space-x-2">
             @auth
                 <li>
-                    {{auth()->user()->name ?? 'Guest'}}
+                    <a href="{{ route('profile.index', auth()->user()) }}">
+                        {{auth()->user()->name ?? 'Guest'}}
+                    </a>
                 </li>
                 <li>
                     <form method="POST" action="{{ route('auth.destroy') }}">

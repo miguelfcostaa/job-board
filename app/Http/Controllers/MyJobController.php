@@ -15,7 +15,12 @@ class MyJobController extends Controller
     {
         return view(
             'my_job.index', 
-            ['jobs' => auth()->user()->employer->jobs()->with(['employer', 'jobApplications', 'jobApplications.user'])->get()]);
+            ['jobs' => auth()->user()->employer
+                ->jobs()
+                ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                ->withTrashed()
+                ->latest()
+                ->get()]);
     }
 
     /**
@@ -23,6 +28,7 @@ class MyJobController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Job::class);
         return view('my_job.create');
     }
 
@@ -31,6 +37,7 @@ class MyJobController extends Controller
      */
     public function store(JobRequest $request)
     {
+        $this->authorize('create', Job::class);
         auth()->user()->employer->jobs()->create($request->validated());
 
         return redirect()->route('my_job.index')
@@ -50,6 +57,7 @@ class MyJobController extends Controller
      */
     public function edit(Job $myJob)
     {
+        $this->authorize('update', $myJob);
         return view('my_job.edit', [
             'job' => $myJob
         ]);
@@ -60,6 +68,7 @@ class MyJobController extends Controller
      */
     public function update(JobRequest $request, Job $myJob)
     {
+        $this->authorize('update', $myJob);
         $myJob->update($request->validated());
 
         return redirect()->route('my_job.index')
@@ -69,8 +78,21 @@ class MyJobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Job $myJob)
     {
-        //
+        $this->authorize('delete', $myJob);     
+        $myJob->delete();
+
+        return redirect()->route('my_job.index')
+            ->with('success', 'Job deleted successfully.');
+    }
+
+    public function restore(Job $myJob)
+    {
+        $this->authorize('restore', $myJob);
+        $myJob->restore();
+
+        return redirect()->route('my_job.index')
+            ->with('success', 'Job restored successfully.');
     }
 }

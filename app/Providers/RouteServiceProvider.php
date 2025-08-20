@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use App\Models\Job;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,11 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureRateLimiting();
+
+        // Configure route model binding to include soft deleted models for restore route
+        Route::bind('myJob', function ($value) {
+            return Job::withTrashed()->findOrFail($value);
+        });
 
         $this->routes(function () {
             Route::middleware('api')
