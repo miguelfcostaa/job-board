@@ -21,7 +21,7 @@
                 </form>
             </div>
         </div>
-        <div class="flex gap-8">
+        <div class="flex gap-8 mb-4 items-center">
             <div class="flex flex-col space-y-2 ml-2">
                 <div class="w-[180px]">
                     <img 
@@ -30,16 +30,8 @@
                         class="object-cover rounded-md"
                     />
                 </div>
-                <form method="POST" action="{{ route('avatar.update', $user) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <x-text-input type="file" name="avatar" id="avatar" />
-                    <div>
-                        <x-button type="submit" class="mt-2">Update Picture</x-button>
-                    </div>
-                </form>
             </div>
-            <div class="flex flex-col space-y-4 mt-8">
+            <div class="flex flex-col space-y-4">
                 <div>
                     <label class="font-medium">Name: </label>{{ $user->name }}
                 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AvatarUpdateRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,6 +22,8 @@ class AvatarUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required|string|min:3',
+            'email' => 'required|email',
             'avatar' => [
                 'required',
                 'image',

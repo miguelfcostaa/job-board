@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -55,15 +58,24 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $profile)
+    public function update(ProfileRequest $request, User $profile)
     {
         $this->authorize('update', $profile);
-        $request->validate([
-            'name' => 'required|string|min:3',
-            'email' => 'required|email'
-        ]);
 
-        $profile->update($request->only('name', 'email'));
+        $user = Auth::user();
+        
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $user->fill($request->validated());
+
+        $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'avatar' => $avatarPath
+        ]);
 
         return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
     }
