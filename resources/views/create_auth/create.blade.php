@@ -1,8 +1,8 @@
 <x-layout>
-    <h1 class="my-16 text-center text-4xl font-medium text-slate-600">
-        Create an account
-    </h1>
     <x-card class="py-8 px-16 mt-4">
+        <h1 class="mt-2 mb-12 text-center text-4xl font-medium text-slate-600">
+            Create an account
+        </h1>
         <form action="{{ route('create_auth.store') }}" method="POST">
             @csrf
 

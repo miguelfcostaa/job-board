@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\MyJobController;
 use App\Http\Controllers\CreateAuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AvatarController;
 
 Route::get('/', fn() => to_route('jobs.index'));
 
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function() {
 
     Route::resource('employer', EmployerController::class)
         ->only(['create', 'store']);
+
+    Route::put('avatar', [AvatarController::class, 'update'])->name('avatar.update');
+    Route::delete('avatar', [AvatarController::class, 'destroy'])->name('avatar.destroy');
 
     Route::middleware('employer')->group(function() {
         Route::resource('my_job', MyJobController::class);

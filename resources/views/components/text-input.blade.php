@@ -1,5 +1,17 @@
 <div class="relative">
-    @if ('textarea' != $type)
+    @if ('file' == $type)
+        <input 
+            type="file" 
+            accept="image/*"
+            @class(["text-xs text-grey-500 w-44
+                file:mr-1 file:py-1.5 file:px-2.5
+                file:rounded-md file:bg-blue-100 file:border-0
+                file:text-sm file:shadow-sm file:text-black file:font-semibold
+                hover:file:cursor-pointer hover:file:bg-slate-100"])
+            name="{{ $name }}"
+            id="{{ $name }}" 
+        />
+    @elseif ('textarea' != $type)
         @if ($formRef)
             <button 
                 type="button" 

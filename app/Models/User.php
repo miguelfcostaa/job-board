@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -52,6 +53,27 @@ class User extends Authenticatable
     public function jobApplications(): HasMany
     {
         return $this->hasMany(JobApplication::class);
+    }
+
+    /**
+     * Get the user's avatar URL
+     */
+    public function getAvatarUrl(): string
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+        
+        // Fallback para avatar padrão
+        return asset('default-avatar-user.jpg');
+    }
+
+    /**
+     * Get the user's avatar path for storage
+     */
+    public function getAvatarPath(): ?string
+    {
+        return $this->avatar ? storage_path('app/public/' . $this->avatar) : null;
     }
 }
 
