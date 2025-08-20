@@ -37,7 +37,7 @@ Want to run this locally? Here's how:
 ```bash
 # 1. Get the code
 git clone <your-repo-url>
-cd laravel-job-board
+cd job-board
 
 # 2. Install everything
 composer install
